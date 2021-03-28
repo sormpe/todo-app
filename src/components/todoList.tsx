@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 
 import TodoItem from "./todoItem";
 
+import { setToLocalStorage, getFromLocalStorage } from "../utils/storage";
+
 const TodoList: React.FC = () => {
   const [tasks, setTasks] = useState<Array<TodoType>>([]);
   const [inputValue, setInputValue] = useState<string>("");
@@ -14,7 +16,7 @@ const TodoList: React.FC = () => {
         ...[{ task: inputValue, index: tasks.length, done: false }],
       ];
       setTasks(finalTasks);
-      localStorage.setItem("todoTasks", JSON.stringify(finalTasks));
+      setToLocalStorage(finalTasks);
       setInputValue("");
     } else {
       setErrorText("Please give a task!");
@@ -27,7 +29,7 @@ const TodoList: React.FC = () => {
   };
 
   useEffect(() => {
-    const storageItems = localStorage.getItem("todoTasks");
+    const storageItems = getFromLocalStorage();
     if (storageItems) {
       // ensure correct indices
       JSON.parse(storageItems).map(
