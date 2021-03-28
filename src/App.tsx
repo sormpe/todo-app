@@ -5,14 +5,12 @@ import "font-awesome/css/font-awesome.min.css";
 
 import TodoList from "./components/todoList";
 
-function App() {
+const App: React.FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <TodoList />
-      </header>
+    <div className="app">
+      <TodoList />
     </div>
   );
-}
+};
 
 export default App;
