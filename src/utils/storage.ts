@@ -5,7 +5,7 @@ const setToLocalStorage = (items: TodoType[]) => {
 const getFromLocalStorage = () => {
   const storageItems = localStorage.getItem("todoTasks");
   if (storageItems) {
-    return storageItems;
+    return JSON.parse(storageItems);
   }
   return;
 };

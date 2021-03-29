@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import TodoItem from "./todoItem";
+import TodoItem from "./items/todoItem";
 
 import { setToLocalStorage, getFromLocalStorage } from "../utils/storage";
 
@@ -31,11 +31,7 @@ const TodoList: React.FC = () => {
   useEffect(() => {
     const storageItems = getFromLocalStorage();
     if (storageItems) {
-      // ensure correct indices
-      JSON.parse(storageItems).map(
-        (s: TodoType, idx: number) => (s.index = idx)
-      );
-      setTasks(JSON.parse(storageItems));
+      setTasks(storageItems);
     }
   }, []);
 

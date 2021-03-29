@@ -12,6 +12,7 @@ type TodoItemProps = {
 
 type SubItemProps = {
   task: TodoType;
+  idx: number;
   toggleDoneStatus: (idx: number) => void;
-  removeTask: (idx: number) => void;
+  removeTask: () => void;
 };

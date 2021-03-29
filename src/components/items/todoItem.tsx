@@ -3,31 +3,21 @@ import React from "react";
 import DoneItem from "./subitems/doneItem";
 import NotDoneItem from "./subitems/notDoneItem";
 
-import { setToLocalStorage } from "../utils/storage";
+import { setToLocalStorage } from "../../utils/storage";
 
 const TodoItem: React.FC<TodoItemProps> = ({ task, tasks, setTasks }) => {
-  const removeTask = (idx: number) => {
-    const filtered = tasks.filter((t) => t.index !== idx);
-    setTasks(filtered);
-    setToLocalStorage(filtered);
+  const removeTask = () => {
+    const copyOfTasks = [...tasks];
+    copyOfTasks.splice(tasks.indexOf(task), 1);
+    setTasks(copyOfTasks);
+    setToLocalStorage(copyOfTasks);
   };
 
   const toggleDoneStatus = (idx: number) => {
-    const mappedTodos = tasks.map((t) =>
-      t.index === idx
-        ? {
-            task: t.task,
-            index: t.index,
-            done: !t.done,
-          }
-        : {
-            task: t.task,
-            index: t.index,
-            done: t.done,
-          }
-    );
-    setTasks(mappedTodos);
-    setToLocalStorage(mappedTodos);
+    const copyOfTasks = [...tasks];
+    copyOfTasks[idx].done = !copyOfTasks[idx].done;
+    setTasks(copyOfTasks);
+    setToLocalStorage(copyOfTasks);
   };
 
   return (
@@ -35,12 +25,14 @@ const TodoItem: React.FC<TodoItemProps> = ({ task, tasks, setTasks }) => {
       {task.done ? (
         <DoneItem
           task={task}
+          idx={tasks.indexOf(task)}
           toggleDoneStatus={toggleDoneStatus}
           removeTask={removeTask}
         />
       ) : (
         <NotDoneItem
           task={task}
+          idx={tasks.indexOf(task)}
           toggleDoneStatus={toggleDoneStatus}
           removeTask={removeTask}
         />
