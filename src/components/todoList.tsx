@@ -11,10 +11,7 @@ const TodoList: React.FC = () => {
 
   const addNewTask = () => {
     if (inputValue) {
-      const finalTasks = [
-        ...tasks,
-        ...[{ task: inputValue, index: tasks.length, done: false }],
-      ];
+      const finalTasks = [...tasks, ...[{ task: inputValue, done: false }]];
       setTasks(finalTasks);
       setToLocalStorage(finalTasks);
       setInputValue("");

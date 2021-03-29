@@ -1,6 +1,5 @@
 type TodoType = {
   task: string;
-  index: number;
   done: boolean;
 };
 
